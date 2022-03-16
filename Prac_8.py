@@ -1,47 +1,34 @@
+#practical 8
 #ID:20CE153
 #NAME: Shruti Unadkat
-class Student:  # student class
-    def __init__(self, rollNo, name):  # define roll number and name when the object of studnt is created
-        self.rollNo = rollNo  # initialize roll number
-        self.name = name  # initialize name
+class stack:
+    def __init__(self):
+        self.items=[]
 
-    def display(self):  # display method of student
-        print(f'Student Roll No: {self.rollNo}')  # print roll number of student
-        print(f'Student Name: {self.name}')  # print name of student
+    def push(self,a):
+        self.items.append(a)
 
+    def pop(self):
+        return self.items.pop()
 
-class Exam(Student):  # exam class
-    def __init__(self, rollNo, name, subject):  # define roll number, name and subject
-        super().__init__(rollNo, name)  # initialize  roll number and name from student class
-        self.subject = subject  # initialize subject
+    def isempty(self):
+        return self.items==[]
 
-    def display(self):  # display method of exam
-        super().display()  # display roll number and name from student class
-        for i in range(len(self.subject)):
-            print(f'Subject {i + 1} Marks: {self.subject[i]}')  # print marks of subject
+s=stack()
+while True:
+    print('push <value>')
+    print('pop')
+    print('quit')
+    what_to_do=input('what do you want to do: ').split()
 
+    opr=what_to_do[0].strip().lower()
+    if opr=='push':
+        s.push(int(what_to_do[1]))
+    elif opr=='pop':
+        if s.isempty():
+            print("stack is empty")
+        else:
+            print('poped element is' , s.pop())
 
-class Result(Exam):  # class result
-    total_marks = 0
-
-    def __init__(self, rollNo, name, subject):  # define roll number, name , subject
-        super().__init__(rollNo, name, subject)  # initialize roll numer, name, subject from exam class
-        self.total_marks = sum(subject)  # do sum of all marks
-
-    def display(self):  # display method of result method
-        super().display()  # display roll number, name and subject
-        print(f'Total Marks: {self.total_marks}')
-
-
-if __name__ == '__main__':
-    student = Student(1, 'Prachi')
-    student.display()
-    print()
-
-    exam = Exam(2, 'Shruti', [20, 25, 18])
-    exam.display()
-    print()
-
-    result = Result(3, 'Disha', [11, 11, 13])
-    result.display()
-    print()
+    elif opr=='quit':
+        break
